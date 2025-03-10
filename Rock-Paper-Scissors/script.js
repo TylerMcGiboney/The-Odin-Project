@@ -23,13 +23,27 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-function playRound(humanChoice,computerChoice) {
-    let hChoice = humanChoice.toLowerCase();
-    let cChoice = computerChoice.toLowerCase();
+const buttons = document.querySelectorAll("button");
+
+
+
+
+function playRound(humanChoice) {
+    const computerSelection = getComputerChoice()
+    
+
+    let hChoice = humanChoice;
+    let cChoice = computerSelection.toLowerCase();
     let pWinner = false;
     let cWinner = false;
     let tieBool = false;
     let winner = "";
+
+    const resultDiv = document.getElementById("results");
+
+    let resultMessage = 'You chose: ' + hChoice  + "<br>Computer chose: " + cChoice + "<br>";
+
+
 
     if(hChoice == cChoice) {
         winner = "Tie";
@@ -47,38 +61,15 @@ function playRound(humanChoice,computerChoice) {
         winner = "Computer";
     }
 
-    console.log("The player chose " + hChoice + " and the computer chose " + cChoice + ", therefore the winner is " + winner);
+    resultMessage += "The winner is " + winner;
+    //console.log("The player chose " + hChoice + " and the computer chose " + cChoice + ", therefore the winner is " + winner);
+    resultDiv.innerHTML = resultMessage;
     return winner;
 
 }
 
 //const humanSelection = getHumanChoice();
-//const computerSelection = getComputerChoice();
+const computerSelection = getComputerChoice();
 
 //playRound(humanSelection,computerSelection);
 
-function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-    
-    for(let i =1; i <= 5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        let winner = playRound(humanSelection,computerSelection);
-        if(winner == "Player"){
-            playerScore++;
-        }
-        else if(winner == "Computer"){
-            computerScore++;
-        }
-        else {
-            console.log("Both choices were the same resulting in a tie.");
-        }
-
-        console.log("Player: " + playerScore);
-        console.log("Computer: " + computerScore);
-    }
-    
-}
-
-playGame();
